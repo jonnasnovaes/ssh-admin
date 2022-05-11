@@ -125,6 +125,7 @@ function openCreateSSHDialog() {
         height: 300, 
         center: true, 
         resizable: false,
+        frame: false,
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
