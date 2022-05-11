@@ -15,21 +15,21 @@ body {
 }
 
 .content-form {
-    margin-top: 10%;
+    padding-top: 30px;
     margin-inline: 50px;
 }
 
-/* .form {
-    background-color: #373a59;
+.close-button {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: end;
+    background-color: #373a59;
+    padding-top: 10px;
+    padding-right: 10px;
 }
-
-.form > div {
-    display: block;
-} */
-
-/* form {
-    display: block;
-} */
+.close-button > button {
+    color: #ffc107;
+    text-decoration: none;
+}
+.close-button > button:hover {
+    color: #ffc107;
+}
