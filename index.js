@@ -42,11 +42,7 @@ function criaListItems(reset = false) {
               fs.unlinkSync(resolve(app.getAppPath(), `keys\\${sshClienteSelecionado.bat}`));
             }
           } catch (error) {
-              dialog.showMessageBoxSync(null, {
-                icon: resolve(__dirname, 'assets', 'tray-icon.png'),
-                title: 'Error',
-                message: 'Não foi possível deletar os arquivos relacionados a essa conexão',
-              }); 
+            alertMessage('Não foi possível deletar os arquivos relacionados a essa conexão');
           }
 
           const sshClientsUpdate = sshClients.filter(sshItem => sshItem.nomeConexao != item.nomeConexao);
@@ -107,6 +103,19 @@ function render() {
 
             if (apagarConexoes == 0) {
                 store.set('ssh', JSON.stringify([]));
+                
+                try {
+                  const caminhoChaves = resolve(__dirname, 'keys');
+
+                  fs.rmSync(caminhoChaves, {recursive: true});  
+                  fs.mkdirSync(caminhoChaves);  
+
+                  alertMessage('Todas as conexões/chaves foram deletadas com sucesso!');
+
+                } catch (error) {
+                  alertMessage('Não foi possível apagar todas as chaves privadas das conexões SSH');
+                }
+
             }
             
         }
@@ -142,6 +151,14 @@ function openCreateSSHDialog() {
 
 function executeSSHCommandLine(batFile) {
   child_process.spawn("cmd", ['/c', 'start', '""', batFile], { env: process.env });
+}
+
+function alertMessage(texto) {
+  dialog.showMessageBoxSync(null, {
+      icon: `${app.getAppPath()}/assets/tray-icon.png`,
+      title: 'ALERTA',
+      message: texto,
+  });
 }
 
 app.on('ready', () => {
