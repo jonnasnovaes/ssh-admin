@@ -41,19 +41,15 @@
 <script type="text/javascript">
 
     const { app, dialog } = require('@electron/remote');
-
     const { resolve } = require('path');
-
     const fs = require("fs");
 
     const Store = require('electron-store');
-
     const scheme = {
         ssh: {
             type: 'string',
         },
     }
-
     const store = new Store({ scheme });
 
     const storeSSH = store.get('ssh');
@@ -64,6 +60,9 @@
 
     var nomeBatFile = '';
     var nomeChave = '';
+
+    const enviroment = 'cd keys';
+    const enviromentProd = 'cd resources/app/keys';
 
     function salvarConexaoSSH() {
 
@@ -79,7 +78,11 @@
             if (conexaoExiste == undefined) {
 
                 if (chaveAdicionada) {
-                    fs.writeFileSync(destinoBat, `cd keys \n ssh ${conexao.value}`);
+
+                    // A variavel de enviroment deve ser trocada sempre que for testar/buildar
+                    const dirEnviroment = enviromentProd;
+
+                    fs.writeFileSync(destinoBat, `${dirEnviroment} \n ssh ${conexao.value}`);
                 }
                 
                 sshClients.push({ 
