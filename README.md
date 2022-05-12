@@ -4,6 +4,11 @@
 Essa aplicação tem o intuito de facilitar o gerenciamento e acesso de máquinas utilizando do protocolo SSH através do prompt de comando (CMD)
 
 
+## Plataformas
+
+* Windows 11
+
+
 ## Variáveis de Ambiente
 
 Para rodar esse projeto você precisará alternar a variavél `dirEnviroment` entre:
